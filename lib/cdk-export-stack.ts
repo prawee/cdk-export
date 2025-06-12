@@ -13,7 +13,7 @@ export class CdkExportStack extends cdk.Stack {
       handler: 'handler',
       runtime: lambda.Runtime.NODEJS_22_X,
       bundling: {
-        nodeModules: ['hono'],
+        nodeModules: ['hono', 'exceljs'],
       },
     });
 

@@ -1,5 +1,8 @@
 # REST
 @baseUrl={{$dotenv BASE_URL}}
 
-####
+#### Home
 GET {{baseUrl}}
+
+#### Export excel
+GET {{baseUrl}}/excel
