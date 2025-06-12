@@ -14,7 +14,7 @@ app.get('/excel', async (c) => {
     worksheet.addRow([new Date(), 'Data 3'])
 
     const buffer = await workbook.xlsx.writeBuffer()
-    const base64 = Buffer.from(buffer).toString('base64')
+    // const base64 = Buffer.from(buffer).toString('base64')
 
     // c.header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     // c.header('Content-Disposition', 'attachment; filename="demo.xlsx"')
@@ -35,13 +35,17 @@ app.get('/excel', async (c) => {
     //     },
     //     body: base64,
     // }, 200)
-    return new Response(base64, {
-        status: 200,
-        headers: {
-            'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
-        },
-    })
+    // return new Response(base64, {
+    //     status: 200,
+    //     headers: {
+    //         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    //         'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
+    //     },
+    // })
+    c.status(200)
+    c.header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    c.header('Content-Disposition', 'attachment; filename="cdk-export-excel-demo.xlsx"')
+    return c.body(buffer)
 })
 
 export const handler = handle(app)
