@@ -1,0 +1,5 @@
+# REST
+@baseUrl={{$dotenv BASE_URL}}
+
+####
+GET {{baseUrl}}
