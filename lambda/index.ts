@@ -19,6 +19,7 @@ app.get('/excel', async (c) => {
     // c.header('Content-Disposition', 'attachment; filename="demo.xlsx"')
     // return c.body(csv)
     return new Response(buffer, {
+        status: 200,
         headers: {
             'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
