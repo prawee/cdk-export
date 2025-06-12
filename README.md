@@ -1,14 +1,25 @@
-# Welcome to your CDK TypeScript project
+# CDK Export
 
-This is a blank project for CDK development with TypeScript.
+Simple and demo to testing `Export` with `AWS Lambda` and `AWS CDK`.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Prerequisites
 
-## Useful commands
+- Node.js
+- AWS CLI
+- AWS CDK
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+## How to clone
+
+```bash
+git clone https://github.com/prawee/cdk-export.git
+cd cdk-export
+```
+
+## How to run
+
+```bash
+npm install
+npm run build
+npx cdk synth
+npx cdk deploy
+```
