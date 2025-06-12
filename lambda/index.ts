@@ -13,11 +13,17 @@ app.get('/excel', async (c) => {
     worksheet.addRow([new Date(), 'Data 2'])
     worksheet.addRow([new Date(), 'Data 3'])
 
-    const csv = await workbook.xlsx.writeBuffer()
+    const buffer = await workbook.xlsx.writeBuffer()
 
-    c.header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    c.header('Content-Disposition', 'attachment; filename="demo.xlsx"')
-    return c.body(csv)
+    // c.header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    // c.header('Content-Disposition', 'attachment; filename="demo.xlsx"')
+    // return c.body(csv)
+    return new Response(buffer, {
+        headers: {
+            'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
+        },
+    })
 })
 
 export const handler = handle(app)
