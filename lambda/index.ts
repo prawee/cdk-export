@@ -26,15 +26,22 @@ app.get('/excel', async (c) => {
     //         'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
     //     },
     // })
-    return c.json({
-        isBase64Encoded: true,
-        statusCode: 200,
+    // return c.json({
+    //     isBase64Encoded: true,
+    //     statusCode: 200,
+    //     headers: {
+    //         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    //         'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
+    //     },
+    //     body: base64,
+    // }, 200)
+    return new Response(base64, {
+        status: 200,
         headers: {
             'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
         },
-        body: base64,
-    }, 200)
+    })
 })
 
 export const handler = handle(app)
