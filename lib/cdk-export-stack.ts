@@ -13,6 +13,7 @@ export class CdkExportStack extends cdk.Stack {
       entry: path.join(__dirname, '../src/lambda.ts'),
       handler: 'handler',
       runtime: lambda.Runtime.NODEJS_22_X,
+      timeout: cdk.Duration.seconds(60),
       bundling: {
         nodeModules: ['hono', 'exceljs', 'dotenv', '@aws-sdk/client-s3', '@aws-sdk/s3-request-presigner'],
       },
