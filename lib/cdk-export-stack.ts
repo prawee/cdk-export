@@ -14,11 +14,11 @@ export class CdkExportStack extends cdk.Stack {
       handler: 'handler',
       runtime: lambda.Runtime.NODEJS_22_X,
       bundling: {
-        nodeModules: ['hono', 'exceljs'],
+        nodeModules: ['hono', 'exceljs', 'dotenv', '@aws-sdk/client-s3', '@aws-sdk/s3-request-presigner'],
       },
       environment: {
         S3_REGION: process.env.S3_REGION || 'ap-southeast-1',
-        S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID || '',
+        S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID || '', 
         S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY || '',
         S3_BUCKET_NAME: process.env.S3_BUCKET_NAME || '',
       },

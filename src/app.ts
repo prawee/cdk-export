@@ -65,7 +65,16 @@ app.get('/excel', async (c) => {
     const signedUrl = await getSignedUrl(s3, viewCommand, {
         expiresIn: 60 * 60 * 24 * 7
     })
-    return c.json({ url: signedUrl })
+    // return c.json({ url: signedUrl })
+    // return c.body(signedUrl)
+    const result = await fetch(signedUrl)
+    return new Response(result.body, {
+        status: 200,
+        headers: {
+            'Content-Type': 'application/octet-stream',
+            'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
+        },
+    })
 })
 
 export default app
