@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as path from 'path';
+import 'dotenv/config'
 
 export class CdkExportStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {

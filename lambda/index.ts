@@ -1,6 +1,9 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/aws-lambda'
 import * as ExcelJS from 'exceljs'
+import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import s3 from './config'
 
 const app = new Hono()
 
@@ -42,10 +45,28 @@ app.get('/excel', async (c) => {
     //         'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
     //     },
     // })
-    c.status(200)
-    c.header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    c.header('Content-Disposition', 'attachment; filename="cdk-export-excel-demo.xlsx"')
-    return c.body(buffer)
+    // c.status(200)
+    // c.header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    // c.header('Content-Disposition', 'attachment; filename="cdk-export-excel-demo.xlsx"')
+    // return c.body(buffer)
+    const s3Key = `excel/demo-${Date.now()}.xlsx`
+    const command = new PutObjectCommand({
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: s3Key,
+        Body: Buffer.from(buffer),
+        ContentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+    await s3.send(command)
+
+    const viewCommand = new GetObjectCommand({
+        Key: s3Key,
+        // ResponseContentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        Bucket: process.env.S3_BUCKET_NAME as string,
+    })
+    const signedUrl = await getSignedUrl(s3, viewCommand, {
+        expiresIn: 60 * 60 * 24 * 7
+    })
+    return c.json({ url: signedUrl })
 })
 
 export const handler = handle(app)
