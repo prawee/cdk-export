@@ -68,6 +68,8 @@ app.get('/excel', async (c) => {
     // return c.json({ url: signedUrl })
     // return c.body(signedUrl)
     console.log('signedUrl', signedUrl)
+    return c.redirect(signedUrl, 302)
+
     // const result = await fetch(signedUrl)
     // console.log('result', result)
     // return new Response(result.body, {
@@ -77,7 +79,6 @@ app.get('/excel', async (c) => {
     //         'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
     //     },
     // })
-    return c.redirect(signedUrl, 302)
 })
 
 export default app
