@@ -68,17 +68,17 @@ app.get('/excel', async (c) => {
     // return c.json({ url: signedUrl })
     // return c.body(signedUrl)
     console.log('signedUrl', signedUrl)
-    return c.redirect(signedUrl, 302)
+    // return c.redirect(signedUrl, 302)
 
-    // const result = await fetch(signedUrl)
-    // console.log('result', result)
-    // return new Response(result.body, {
-    //     status: 200,
-    //     headers: {
-    //         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    //         'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
-    //     },
-    // })
+    const result = await fetch(signedUrl)
+    console.log('result', result)
+    return new Response(result.body, {
+        status: 200,
+        headers: {
+            'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition': 'attachment; filename="cdk-export-excel-demo.xlsx"',
+        },
+    })
 })
 
 export default app
