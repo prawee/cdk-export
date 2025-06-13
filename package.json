@@ -8,9 +8,11 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "dev": "ts-node src/index.ts",
     "cdk": "cdk"
   },
   "devDependencies": {
+    "@hono/node-server": "^1.14.4",
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
     "aws-cdk": "2.1018.0",

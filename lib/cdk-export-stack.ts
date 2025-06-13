@@ -10,7 +10,7 @@ export class CdkExportStack extends cdk.Stack {
     super(scope, id, props);
 
     const fn = new NodejsFunction(this, 'CdkExportLambda', {
-      entry: path.join(__dirname, '../lambda/index.ts'),
+      entry: path.join(__dirname, '../src/lambda.ts'),
       handler: 'handler',
       runtime: lambda.Runtime.NODEJS_22_X,
       bundling: {

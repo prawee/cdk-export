@@ -1,5 +1,4 @@
 import { Hono } from 'hono'
-import { handle } from 'hono/aws-lambda'
 import * as ExcelJS from 'exceljs'
 import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
@@ -69,4 +68,4 @@ app.get('/excel', async (c) => {
     return c.json({ url: signedUrl })
 })
 
-export const handler = handle(app)
+export default app
